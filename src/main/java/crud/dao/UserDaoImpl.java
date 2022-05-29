@@ -7,14 +7,15 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-@Component
-@Transactional
-public class UserDaoImpl implements UserDao{
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+@Component
+public class UserDaoImpl implements UserDao{
 
     @PersistenceContext
     private EntityManager entityManager;
-
+    @Transactional
     public void add(User user) {
         entityManager.persist(user);
     }
@@ -28,11 +29,12 @@ public class UserDaoImpl implements UserDao{
     public User getUserById(long id) {
         return entityManager.find(User.class,id);
     }
-
+    @Transactional
     public void deleteUserById(long id) {
+
         entityManager.remove(getUserById(id));
     }
-
+    @Transactional
     public void updateUser(User user) {
 
     }

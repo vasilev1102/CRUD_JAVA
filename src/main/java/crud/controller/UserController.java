@@ -25,7 +25,7 @@ public class UserController {
         model.addAttribute("users",userService.listUsers());
         return "index";
     }*/
-    @GetMapping(value = "/")
+    @GetMapping(value = "/users")
     public String getUsers(Model model){
         List<User> us = userService.listUsers();
         for (User user:us) {
@@ -39,6 +39,10 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public String getUser(@PathVariable("id") int id,Model model){
             model.addAttribute("user",userService.getUserById(id));
+        List<User> us = userService.listUsers();
+        for (User user:us) {
+            System.out.println(user.getId());
+        }
         return "user";
     }
 
